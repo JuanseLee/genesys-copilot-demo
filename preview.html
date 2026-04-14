@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demo Bank | Atención digital</title>
+  <style>
+    :root {
+      --primary: #0b3a82;
+      --primary-dark: #082d66;
+      --accent: #19a974;
+      --bg: #f4f7fb;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --white: #ffffff;
+      --border: #dbe3ee;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: var(--white);
+      padding: 18px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      margin-left: 18px;
+      font-size: 0.95rem;
+    }
+
+    .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 56px 24px 32px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .hero-card,
+    .panel,
+    .faq-item,
+    .notice {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+    }
+
+    .hero-copy h1 {
+      font-size: 2.5rem;
+      margin: 0 0 12px;
+    }
+
+    .hero-copy p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin: 0 0 24px;
+      max-width: 640px;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 700;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: var(--white);
+    }
+
+    .btn-secondary {
+      background: var(--white);
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .hero-card {
+      padding: 24px;
+    }
+
+    .hero-card h3 {
+      margin-top: 0;
+      color: var(--primary);
+    }
+
+    .hero-card ul {
+      padding-left: 18px;
+      margin-bottom: 0;
+    }
+
+    .section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 10px 24px 36px;
+    }
+
+    .section h2 {
+      margin-bottom: 8px;
+      font-size: 1.8rem;
+    }
+
+    .section > p {
+      color: var(--muted);
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .panel {
+      padding: 22px;
+    }
+
+    .panel h3 {
+      margin-top: 0;
+      color: var(--primary);
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .faq-item {
+      padding: 18px 20px;
+    }
+
+    .faq-item h3 {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+      color: var(--primary);
+    }
+
+    .faq-item p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .notice {
+      margin-top: 18px;
+      padding: 18px 20px;
+      border-left: 6px solid var(--accent);
+    }
+
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      margin-top: 24px;
+      padding: 24px;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      font-size: 0.95rem;
+    }
+
+    .chat-hint {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      background: var(--primary);
+      color: var(--white);
+      padding: 14px 18px;
+      border-radius: 999px;
+      box-shadow: 0 12px 30px rgba(11,58,130,0.28);
+      font-weight: 700;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr; }
+      .nav { flex-direction: column; align-items: flex-start; }
+      .nav-links a { margin-left: 0; margin-right: 12px; }
+      .hero-copy h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="brand">Demo Bank</div>
+      <div class="nav-links">
+        <a href="#productos">Productos</a>
+        <a href="#beneficios">Beneficios</a>
+        <a href="#faqs">FAQs</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <h1>Tu banco digital, simple y cercano</h1>
+        <p>
+          Bienvenido a Demo Bank. Consulta preguntas frecuentes, conoce nuestros servicios
+          y chatea con un asesor desde la web para resolver dudas de productos financieros.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#faqs">Ver preguntas frecuentes</a>
+          <a class="btn btn-secondary" href="#contacto">Hablar con un asesor</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <h3>Servicios destacados</h3>
+        <ul>
+          <li>Cuenta de ahorros digital</li>
+          <li>Tarjeta de crédito</li>
+          <li>Crédito de libre inversión</li>
+          <li>Atención por mensajería web</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="productos">
+      <h2>Productos principales</h2>
+      <p>Un sitio simple para demo de banca y mensajería digital con Genesys Cloud.</p>
+      <div class="grid">
+        <div class="panel">
+          <h3>Cuenta Demo Ahorros</h3>
+          <p>Apertura fácil, consulta de saldo y movimientos en línea.</p>
+        </div>
+        <div class="panel">
+          <h3>Tarjeta Demo Crédito</h3>
+          <p>Compras nacionales e internacionales con beneficios promocionales.</p>
+        </div>
+        <div class="panel">
+          <h3>Crédito Demo Express</h3>
+          <p>Simulación rápida, información de tasas y requisitos básicos.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="beneficios">
+      <h2>¿Por qué usar nuestro canal digital?</h2>
+      <p>La idea es que el cliente encuentre respuestas rápidas y pueda iniciar chat si necesita apoyo humano.</p>
+      <div class="grid">
+        <div class="panel">
+          <h3>Atención rápida</h3>
+          <p>El cliente puede iniciar conversación directamente desde la página.</p>
+        </div>
+        <div class="panel">
+          <h3>Autoservicio</h3>
+          <p>Las FAQs ayudan a resolver preguntas comunes antes de escalar al agente.</p>
+        </div>
+        <div class="panel">
+          <h3>Contexto para el agente</h3>
+          <p>Ideal para combinar con Agent Copilot y una base de conocimiento controlada.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faqs">
+      <h2>Preguntas frecuentes</h2>
+      <p>Estas FAQs te sirven también como base para tus artículos de conocimiento en la demo.</p>
+      <div class="faq-list">
+        <div class="faq-item">
+          <h3>¿Cómo abro una cuenta en Demo Bank?</h3>
+          <p>Puedes iniciar el proceso en línea y completar la validación de identidad con tu documento.</p>
+        </div>
+        <div class="faq-item">
+          <h3>¿Cómo consulto el saldo de mi cuenta?</h3>
+          <p>Ingresa a la app o solicita apoyo por chat web con uno de nuestros asesores.</p>
+        </div>
+        <div class="faq-item">
+          <h3>¿Qué hago si no reconozco una compra?</h3>
+          <p>Contáctanos por el chat para validar movimientos, bloquear la tarjeta y generar el caso.</p>
+        </div>
+        <div class="faq-item">
+          <h3>¿Cómo solicito un crédito?</h3>
+          <p>En la sección de productos puedes revisar requisitos y luego hablar con un asesor.</p>
+        </div>
+        <div class="faq-item">
+          <h3>¿Puedo hablar con un asesor ahora?</h3>
+          <p>Sí. Usa el botón de chat ubicado en la parte inferior derecha del sitio.</p>
+        </div>
+      </div>
+
+
+  <footer>
+    <div class="footer-inner">
+      <strong>Demo Bank</strong><br />
+      Sitio de demostración para integración de Genesys Cloud Web Messaging + Agent Copilot.
+    </div>
+  </footer>
+
+  <script type="text/javascript" charset="utf-8">
+  (function (g, e, n, es, ys) {
+    g['_genesysJs'] = e;
+    g[e] = g[e] || function () {
+      (g[e].q = g[e].q || []).push(arguments)
+    };
+    g[e].t = 1 * new Date();
+    g[e].c = es;
+    ys = document.createElement('script'); ys.async = 1; ys.src = n; ys.charset = 'utf-8'; document.head.appendChild(ys);
+  })(window, 'Genesys', 'https://apps.mypurecloud.com/genesys-bootstrap/genesys.min.js', {
+    environment: 'prod',
+    deploymentId: '82cdbe25-c5a9-47f6-918b-cf474a5a4233'
+  });
+</script>
+</body>
+</html>
